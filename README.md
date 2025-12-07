@@ -1,112 +1,151 @@
-# Генератор паролей на Python
+# 🔑 Python Password Generator
 
-## Описание
+[![Python version](https://img.shields.io/badge/Python-3.x-blue)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENCE)
 
-Этот скрипт реализует простой генератор паролей с графическим интерфейсом на базе [`tkinter`](https://docs.python.org/3/library/tkinter.html). Пользователь может указать желаемую длину пароля и решить, включать ли специальные символы. Сгенерированный пароль отображается в окне приложения и может быть скопирован в буфер обмена.
+A simple and secure password generator with a graphical interface based on [`Tkinter`](https://docs.python.org/3/library/tkinter.html). It allows you to create strong passwords with a specified length and include special characters for enhanced security.
 
-## Основные компоненты и принципы работы
+---
 
-1.  **Глобальные константы**: Определены строковые константы [`UPPERCASE`](python-generator-password.py:7), [`LOWERCASE`](python-generator-password.py:8), [`DIGITS`](python-generator-password.py:9), [`SYMBOLS`](python-generator-password.py:10), содержащие наборы символов для генерации паролей.
+## ✨ Features
 
-2.  **Класс [`PasswordGeneratorApp`](python-generator-password.py:14)**:
+- **Customizable Length:** Choose the desired password length for various security requirements.
+- **Special Character Inclusion:** Optionally add special characters, numbers, and uppercase/lowercase letters.
+- **Copy to Clipboard:** Quickly copy the generated password with a single click.
+- **User-Friendly Interface:** Intuitive graphical interface for easy use.
 
-    - **Назначение**: Основной класс, управляющий логикой приложения и пользовательским интерфейсом.
-    - **Методы**:
-      - [`__init__(self, root)`](python-generator-password.py:15): Конструктор, который инициализирует окно [`Tkinter`](https://docs.python.org/3/library/tkinter.html) (root), устанавливает заголовок, размер и создает все элементы GUI (кнопки, метки). Также инициализирует [`self.password_var`](python-generator-password.py:20) для хранения и отображения пароля.
-      - [`generate_password(self, length, use_symbols)`](python-generator-password.py:40): Генерирует случайный пароль заданной длины. Гарантирует включение как минимум одной заглавной буквы, одной строчной буквы и одной цифры. При необходимости добавляет один специальный символ. Остальные символы выбираются случайным образом.
-      - [`generate_action(self)`](python-generator-password.py:60): Обработчик события нажатия кнопки "Генерировать пароль". Запрашивает у пользователя длину и необходимость использования специальных символов, затем вызывает [`generate_password()`](python-generator-password.py:40) и обновляет отображаемый пароль, а также активирует кнопку "Copy".
-      - [`copy_to_clipboard(self)`](python-generator-password.py:70): Обработчик события нажатия кнопки "Copy". Копирует текущий отображаемый пароль в буфер обмена и выводит информационное сообщение.
+---
 
-3.  **Функция [`create_gui()`](python-generator-password.py:74)**:
+## 🚀 Installation and Usage
 
-    - **Назначение**: Создает главное окно [`Tkinter`](https://docs.python.org/3/library/tkinter.html) и экземпляр класса [`PasswordGeneratorApp`](python-generator-password.py:14), запуская основной цикл обработки событий GUI (mainloop).
+### Requirements
 
-4.  **Блок `if __name__ == '__main__':`**:
-    - **Назначение**: Стандартная точка входа в Python-скрипт, которая вызывает [`create_gui()`](python-generator-password.py:74) для запуска приложения, когда скрипт выполняется напрямую.
+- Python 3.x
 
-## Как использовать
+### Instructions
 
-Для запуска приложения выполните следующий скрипт Python:
+1.  **Clone the repository:**
 
-```bash
-python python-generator-password.py
-```
+    ```bash
+    git clone https://github.com/fokasssuins/python-generator-password.git
+    cd python-generator-password
+    ```
 
-После запуска появится окно приложения. Нажмите кнопку "Генерировать пароль", чтобы начать процесс генерации. Вам будет предложено ввести желаемую длину пароля и выбрать, использовать ли специальные символы. Сгенерированный пароль отобразится в окне, и вы сможете скопировать его в буфер обмена, нажав кнопку "Copy".
+2.  **Run the application:**
 
-## Структура кода
+    ```bash
+    python python-generator-password.py
+    ```
+
+---
+
+## 💡 Usage
+
+After launching the application, you will see the password generator window:
+
+_(Here could be a screenshot or GIF of the application in action)_
+
+1.  **Click the "Generate Password" button.**
+2.  **Enter the desired password length** in the corresponding field.
+3.  **Confirm if you want to use special characters** by checking or unchecking the corresponding box.
+4.  **The generated password will be displayed in the window.**
+5.  **Click the "Copy" button** to copy the password to the clipboard and use it.
+
+---
+
+## 🛠️ Code Structure
+
+The main application logic is implemented in the [`PasswordGeneratorApp`](python-generator-password.py:14) class.
+
+The [`create_gui()`](python-generator-password.py:86) function initializes the Tkinter root window (`tk.Tk`) and creates an instance of the [`PasswordGeneratorApp`](python-generator-password.py:14) class, passing this root window to it. The `PasswordGeneratorApp` class is responsible for building the user interface, handling events, and generating passwords.
 
 ```mermaid
 classDiagram
-    PasswordGeneratorApp "1" -- "1" tk.Tk : root
-    PasswordGeneratorApp : +__init__(root)
-    PasswordGeneratorApp : +generate_password(length, use_symbols) string
-    PasswordGeneratorApp : +generate_action() void
-    PasswordGeneratorApp : +copy_to_clipboard() void
-    PasswordGeneratorApp : -root
-    PasswordGeneratorApp : -password_var
-    PasswordGeneratorApp : -generate_button
-    PasswordGeneratorApp : -password_label
-    PasswordGeneratorApp : -copy_button
+    class PasswordGeneratorApp {
+        +__init__(root)
+        +generate_password(length, use_symbols) string
+        +generate_action() void
+        +copy_to_clipboard() void
+    }
+    class TkinterRoot
 
-    tk.Tk <|-- create_gui
-    create_gui : +create_gui() void
+    PasswordGeneratorApp "1" -- "1" TkinterRoot : uses root window
 ```
 
 ---
 
-# Python Password Generator
+# 🔑 Генератор Паролей на Python
 
-## Description
+[![Python version](https://img.shields.io/badge/Python-3.x-blue)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENCE)
 
-This script implements a simple password generator with a graphical user interface based on [`tkinter`](https://docs.python.org/3/library/tkinter.html). The user can specify the desired password length and decide whether to include special characters. The generated password is displayed in the application window and can be copied to the clipboard.
+Простой и безопасный генератор паролей с графическим интерфейсом на базе [`Tkinter`](https://docs.python.org/3/library/tkinter.html). Позволяет создавать надежные пароли с заданной длиной и включать специальные символы для повышения безопасности.
 
-## Key Components and Principles of Operation
+---
 
-1.  **Global Constants**: String constants [`UPPERCASE`](python-generator-password.py:7), [`LOWERCASE`](python-generator-password.py:8), [`DIGITS`](python-generator-password.py:9), [`SYMBOLS`](python-generator-password.py:10) are defined, containing character sets for password generation.
+## ✨ Особенности
 
-2.  **[`PasswordGeneratorApp`](python-generator-password.py:14) Class**:
+- **Настраиваемая длина:** Выбор желаемой длины пароля для различных требований безопасности.
+- **Включение спецсимволов:** Опциональное добавление специальных символов, цифр и букв в верхнем/нижнем регистре.
+- **Копирование в буфер обмена:** Быстрое копирование сгенерированного пароля одним кликом.
+- **Удобный интерфейс:** Интуитивно понятный графический интерфейс для легкого использования.
 
-    - **Purpose**: The main class that manages the application logic and user interface.
-    - **Methods**:
-      - [`__init__(self, root)`](python-generator-password.py:15): Constructor that initializes the [`Tkinter`](https://docs.python.org/3/library/tkinter.html) window (root), sets the title, size, and creates all GUI elements (buttons, labels). It also initializes [`self.password_var`](python-generator-password.py:20) for storing and displaying the password.
-      - [`generate_password(self, length, use_symbols)`](python-generator-password.py:40): Generates a random password of the specified length. Ensures the inclusion of at least one uppercase letter, one lowercase letter, and one digit. Optionally adds one special character if `use_symbols` is true. The remaining characters are chosen randomly.
-      - [`generate_action(self)`](python-generator-password.py:60): Event handler for the "Generate Password" button click. Prompts the user for password length and whether to use special characters, then calls [`generate_password()`](python-generator-password.py:40) and updates the displayed password, as well as activating the "Copy" button.
-      - [`copy_to_clipboard(self)`](python-generator-password.py:70): Event handler for the "Copy" button click. Copies the currently displayed password to the clipboard and shows an informational message.
+---
 
-3.  **[`create_gui()`](python-generator-password.py:74) Function**:
+## 🚀 Установка и Запуск
 
-    - **Purpose**: Creates the main [`Tkinter`](https://docs.python.org/3/library/tkinter.html) window and an instance of the [`PasswordGeneratorApp`](python-generator-password.py:14) class, starting the main GUI event loop (mainloop).
+### Требования
 
-4.  **`if __name__ == '__main__':` Block**:
-    - **Purpose**: The standard entry point for a Python script, which calls [`create_gui()`](python-generator-password.py:74) to launch the application when the script is executed directly.
+- Python 3.x
 
-## How to Use
+### Инструкции
 
-To run the application, execute the following Python script:
+1.  **Клонируйте репозиторий:**
 
-```bash
-python python-generator-password.py
-```
+    ```bash
+    git clone https://github.com/fokasssuins/python-generator-password.git
+    cd python-generator-password
+    ```
 
-After launching, an application window will appear. Click the "Generate Password" button to start the generation process. You will be prompted to enter the desired password length and choose whether to use special characters. The generated password will be displayed in the window, and you can copy it to the clipboard by clicking the "Copy" button.
+2.  **Запустите приложение:**
 
-## Code Structure
+    ```bash
+    python python-generator-password.py
+    ```
 
-````mermaid
+---
+
+## 💡 Использование
+
+После запуска приложения вы увидите окно генератора паролей:
+
+_(Здесь может быть скриншот или GIF-файл работы приложения)_
+
+1.  **Нажмите кнопку "Генерировать пароль".**
+2.  **Введите желаемую длину пароля** в соответствующее поле.
+3.  **Подтвердите, хотите ли вы использовать специальные символы**, установив или сняв соответствующий флажок.
+4.  **Сгенерированный пароль отобразится в окне.**
+5.  **Нажмите кнопку "Копировать"**, чтобы скопировать пароль в буфер обмена и использовать его.
+
+---
+
+## 🛠️ Структура Кода
+
+Основная логика приложения реализована в классе [`PasswordGeneratorApp`](python-generator-password.py:14).
+
+Функция [`create_gui()`](python-generator-password.py:86) инициализирует корневое окно Tkinter (`tk.Tk`) и создает экземпляр класса [`PasswordGeneratorApp`](python-generator-password.py:14), передавая ему это корневое окно. Класс `PasswordGeneratorApp` отвечает за построение пользовательского интерфейса, обработку событий и генерацию паролей.
+
+```mermaid
 classDiagram
-    PasswordGeneratorApp "1" -- "1" tk.Tk : root
-    PasswordGeneratorApp : +__init__(root)
-    PasswordGeneratorApp : +generate_password(length, use_symbols) string
-    PasswordGeneratorApp : +generate_action() void
-    PasswordGeneratorApp : +copy_to_clipboard() void
-    PasswordGeneratorApp : -root
-    PasswordGeneratorApp : -password_var
-    PasswordGeneratorApp : -generate_button
-    PasswordGeneratorApp : -password_label
-    PasswordGeneratorApp : -copy_button
+    class PasswordGeneratorApp {
+        +__init__(root)
+        +generate_password(length, use_symbols) string
+        +generate_action() void
+        +copy_to_clipboard() void
+    }
+    class TkinterRoot
 
-    tk.Tk <|-- create_gui
-    create_gui : +create_gui() void
+    PasswordGeneratorApp "1" -- "1" TkinterRoot : использует корневое окно
 ```
 
+---
